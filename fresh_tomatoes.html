@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Fresh Tomatoes!</title>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Slabo+27px|Work+Sans" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <style type="text/css" media="screen">
+        body {
+            padding-top: 80px;
+            font-family: 'Work Sans', sans-serif;
+        }
+        .container h2{
+            font-family: 'Slabo 27px', serif;
+        }
+        #trailer .modal-dialog {
+            margin-top: 200px;
+            width: 640px;
+            height: 480px;
+        }
+        .hanging-close {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            z-index: 9001;
+        }
+        #trailer-video {
+            width: 100%;
+            height: 100%;
+        }
+        .movie-tile {
+            margin-bottom: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .movie-tile:hover {
+            background-color: #EEE;
+            cursor: pointer;
+        }
+        .scale-media {
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+        .scale-media iframe {
+            border: none;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: white;
+        }
+
+        /* Movie description */
+        .image-container{
+            width: 220px;
+            height: 342px;
+            display: block;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .image-container img{
+            width: 100%;
+            height: 100%;
+        }
+
+        .image-container .description-bg{
+            position: absolute;
+            top: 0;
+            width: 220px;
+            height: 342px;
+            background-color: black;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .image-container .description-text{
+            position: absolute;
+            top: -30px;
+            left: 0;
+            opacity: 0;
+            color: white;
+            font-size: 1.3em;
+            transition: 0.4s;
+            pointer-events: none; /* Makes element invisible to clicks */
+        }
+
+        .image-container .description-bg:hover{
+            opacity: 0.8;
+        }
+
+        .image-container .description-bg:hover + .description-text{
+            opacity: 1;
+            top: 30px;
+        }
+
+        /* IMBD div underneath movie title */
+        .imdb{
+            display: block;
+            margin: 0 auto;
+        }
+        .imdb_link{
+            text-decoration: none;
+        }
+        .imdb_link:hover{
+            text-decoration: none;
+        }
+        .imdb .imdb-logo{
+            width: 50px;
+            height: 25px;
+            vertical-align: top;
+        }
+        .imdb .imdb-rating{
+            display: inline;
+            margin: 0;
+            padding-left: 10px;
+            color: black;
+            transition: 0.3s;
+        }
+        .imdb .imdb-rating:hover{
+            color: #5e9bff;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+        // Pause the video when the modal is closed
+        $(document).on('click', '.hanging-close, .modal-backdrop, .modal', function (event) {
+            // Remove the src so the player itself gets removed, as this is the only
+            // reliable way to ensure the video stops playing in IE
+            $("#trailer-video-container").empty();
+        });
+        // Start playing the video whenever the trailer modal is opened
+        $(document).on('click', '.movie-tile', function (event) {
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
+            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+        });
+        // Animate in the movies when the page loads
+        $(document).ready(function () {
+          $('.movie-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+          });
+        });
+    </script>
+</head>
+
+  <body>
+    <!-- Trailer Video Modal -->
+    <div class="modal" id="trailer">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true">
+            <img src="https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
+          </a>
+          <div class="scale-media" id="trailer-video-container">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Page Content -->
+    <div class="container">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="BkL9l7qovsE" data-toggle="modal" data-target="#trailer">
+    <div class="image-container">
+        <img src="http://pics.filmaffinity.com/casablanca-565828825-large.jpg">
+        <div class="description-bg"></div>
+        <span class="description-text">Love history during WW2</span>
+    </div>
+    <h2>Casablanca</h2>
+    <a class="imdb_link" target="_blank" href="http://www.imdb.com/title/tt0034583">
+        <div class="imdb">
+            <img class="imdb-logo" src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg" />
+            <h3 class="imdb-rating">8.6</h3>
+        </div>
+    </a>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="uxh3or6zLvE" data-toggle="modal" data-target="#trailer">
+    <div class="image-container">
+        <img src="http://pics.filmaffinity.com/la_grande_bellezza-366210175-large.jpg">
+        <div class="description-bg"></div>
+        <span class="description-text">Life in decadent modern Rome</span>
+    </div>
+    <h2>The great beauty</h2>
+    <a class="imdb_link" target="_blank" href="http://www.imdb.com/title/tt2358891">
+        <div class="imdb">
+            <img class="imdb-logo" src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg" />
+            <h3 class="imdb-rating">7.7</h3>
+        </div>
+    </a>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="0pdqf4P9MB8" data-toggle="modal" data-target="#trailer">
+    <div class="image-container">
+        <img src="http://www.indiewire.com/wp-content/uploads/2016/08/crhirsww8aad6ty.jpg">
+        <div class="description-bg"></div>
+        <span class="description-text">An idealistic piano player and a frustrated actress fell in love...</span>
+    </div>
+    <h2>La La Land</h2>
+    <a class="imdb_link" target="_blank" href="http://www.imdb.com/title/tt3783958">
+        <div class="imdb">
+            <img class="imdb-logo" src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg" />
+            <h3 class="imdb-rating">8.8</h3>
+        </div>
+    </a>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="FAfR8omt-CY" data-toggle="modal" data-target="#trailer">
+    <div class="image-container">
+        <img src="https://upload.wikimedia.org/wikipedia/en/9/9f/Midnight_in_Paris_Poster.jpg">
+        <div class="description-bg"></div>
+        <span class="description-text">A dreamy writer travels in time in Paris</span>
+    </div>
+    <h2>Midnight in Paris</h2>
+    <a class="imdb_link" target="_blank" href="http://www.imdb.com/title/tt1605783">
+        <div class="imdb">
+            <img class="imdb-logo" src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg" />
+            <h3 class="imdb-rating">7.7</h3>
+        </div>
+    </a>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="3BxE9osMt5U" data-toggle="modal" data-target="#trailer">
+    <div class="image-container">
+        <img src="http://pics.filmaffinity.com/relatos_salvajes-102488639-large.jpg">
+        <div class="description-bg"></div>
+        <span class="description-text">Five different stories with only one thing in common: violence</span>
+    </div>
+    <h2>Wild Tales</h2>
+    <a class="imdb_link" target="_blank" href="http://www.imdb.com/title/tt3011894">
+        <div class="imdb">
+            <img class="imdb-logo" src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg" />
+            <h3 class="imdb-rating">8.1</h3>
+        </div>
+    </a>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="CWJXYC2tBLc" data-toggle="modal" data-target="#trailer">
+    <div class="image-container">
+        <img src="http://pics.filmaffinity.com/la_vaquilla-561240437-large.jpg">
+        <div class="description-bg"></div>
+        <span class="description-text">The adventures of a republican regiment during the spanish civil war</span>
+    </div>
+    <h2>The heifer</h2>
+    <a class="imdb_link" target="_blank" href="http://www.imdb.com/title/tt0090250">
+        <div class="imdb">
+            <img class="imdb-logo" src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg" />
+            <h3 class="imdb-rating">7.6</h3>
+        </div>
+    </a>
+</div>
+
+    </div>
+  </body>
+</html>
