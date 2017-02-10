@@ -9,7 +9,7 @@ main_page_head = '''
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Fresh Tomatoes!</title>
+    <title>Pablo's Movie Trailer Python Site</title>
 
     <!-- Bootstrap 3 -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
@@ -185,7 +185,7 @@ main_page_content = '''
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
+            <a class="navbar-brand" href="#">Pablo's Movie Trailer Python Site</a>
           </div>
         </div>
       </div>
@@ -228,13 +228,13 @@ def create_movie_tiles_content(movies):
                               else None)
 
         # Calls function from imdb_request module to get the rating
-        # and the movie ID from an imdb API.
+        # and the movie description from an imdb API.
         imdb = get_movie_json(movie)
 
         # Append the tile for the movie with its content filled in
         content += movie_tile_content.format(
             movie_title=movie.title,
-            poster_image_url=imdb["Poster"],
+            poster_image_url=movie.poster,
             trailer_youtube_id=trailer_youtube_id,
             movie_storyline=imdb["Plot"],
             imdb_rating=imdb["imdbRating"]
