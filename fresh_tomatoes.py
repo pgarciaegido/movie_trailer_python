@@ -93,7 +93,8 @@ main_page_head = '''
             left: 0;
             opacity: 0;
             color: white;
-            font-size: 1.3em;
+            font-size: 1.2em;
+            line-height: 1.5em;
             transition: 0.4s;
             pointer-events: none; /* Makes element invisible to clicks */
         }
@@ -206,12 +207,10 @@ movie_tile_content = '''
         <span class="description-text">{movie_storyline}</span>
     </div>
     <h2>{movie_title}</h2>
-    <a class="imdb_link" target="_blank" href="http://www.imdb.com/title/{imdb_id}">
-        <div class="imdb">
-            <img class="imdb-logo" src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg" />
-            <h3 class="imdb-rating">{imdb_rating}</h3>
-        </div>
-    </a>
+    <div class="imdb">
+        <img class="imdb-logo" src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg" />
+        <h3 class="imdb-rating">{imdb_rating}</h3>
+    </div>
 </div>
 '''
 
@@ -235,12 +234,12 @@ def create_movie_tiles_content(movies):
         # Append the tile for the movie with its content filled in
         content += movie_tile_content.format(
             movie_title=movie.title,
-            poster_image_url=movie.poster_image_url,
+            poster_image_url=imdb["Poster"],
             trailer_youtube_id=trailer_youtube_id,
-            movie_storyline=movie.storyline,
-            imdb_rating=imdb["imdbRating"],
-            imdb_id=imdb["imdbID"]
+            movie_storyline=imdb["Plot"],
+            imdb_rating=imdb["imdbRating"]
         )
+
     return content
 
 
