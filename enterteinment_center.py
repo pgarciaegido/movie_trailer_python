@@ -31,5 +31,5 @@ volver = media.Movie("Volver",
 movies = [casablanca, the_great_beauty, lalaland, the_man_from_earth,
           relatos_salvajes, volver]
 
-# The open_movies_page method opens a new tab with the
+# The open_movies_page method opens a new tab after generating the site.
 fresh_tomatoes.open_movies_page(movies)

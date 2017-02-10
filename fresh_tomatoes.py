@@ -113,12 +113,6 @@ main_page_head = '''
             display: block;
             margin: 0 auto;
         }
-        .imdb_link{
-            text-decoration: none;
-        }
-        .imdb_link:hover{
-            text-decoration: none;
-        }
         .imdb .imdb-logo{
             width: 50px;
             height: 25px;
